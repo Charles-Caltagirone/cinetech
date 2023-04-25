@@ -1,37 +1,34 @@
+const apiKey = "d626a3bd2b510176142a8c48fbc04b97";
+const imgUrl = "https://image.tmdb.org/t/p/original";
+const apiUrl = "https://api.themoviedb.org/3/";
 let container = document.getElementById("container");
-let section2 = document.getElementById("section2");
-let carousel = document.getElementById("carousel");
 
-// let imgMovies = document.getElementById("imgMovies");
+function fetchMoviesAndSeries(type, div) {
+  fetch(apiUrl + type + "/popular?api_key=" + apiKey + "&language=fr-FR&page=1")
+    .then((response) => response.json())
+    .then((data) => {
+      data.results.forEach((element) => {
+        let carouselMoviesOrSeries = document.getElementById(div);
+        let imgMovies = document.createElement("img");
+        let divItem = document.createElement("div");
+        let divCaption = document.createElement("div");
+        let titleMovie = document.createElement("h3");
+        let mediaURL = document.createElement("a");
 
-// $("#test").on("click", function () {
-fetch(
-  "https://api.themoviedb.org/3/movie/popular?api_key=d626a3bd2b510176142a8c48fbc04b97&language=en-US&page=1d626a3bd2b510176142a8c48fbc04b97"
-)
-  .then((response) => response.json())
-  .then((data) => {
-    let result = data.results.filter(function (element) {
-      // console.log("je suis là");
-      // console.log(element.title);
-      // console.log(element.poster_path);
-      let imgMovies = document.createElement("img");
-      let divItem = document.createElement("div");
-      let divCaption = document.createElement("div");
-      let titleMovie = document.createElement("h3");
+        // imgMovies.style = "width : 200px";
+        imgMovies.src = imgUrl + element.poster_path;
+        imgMovies.className = "d-block w-100";
+        divItem.className = "carousel-item";
+        divCaption.className = "carousel-caption";
+        titleMovie.innerHTML = element.title;
+        mediaURL.href = "film.php?id_movie='" + element.id;
 
-      imgMovies.src =
-        "https://image.tmdb.org/t/p/original" + element.poster_path;
-      //   imgMovies.style = "width : 100px";
-      //   divMovies.append(imgMovies);
-      //   carousel.append(imgMovies);
-      imgMovies.className = "d-block w-100";
-      divItem.className = "item";
-      divCaption.className = "carousel-caption";
-      titleMovie.innerText = element.title;
-      divCaption.append(titleMovie);
-      divItem.append(imgMovies, divCaption);
-      carousel.append(divItem);
-      console.log(divItem);
-      //   divMovies.innerHTML += "<p>" + element.title + "</p>";
+        carouselMoviesOrSeries.append(mediaURL);
+        mediaURL.append(divItem);
+        divItem.append(imgMovies, divCaption);
+        divCaption.append(titleMovie);
+      });
     });
-  });
+}
+fetchMoviesAndSeries("movie", "carouselMovies");
+fetchMoviesAndSeries("tv", "carouselSeries");
