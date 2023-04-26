@@ -13,7 +13,9 @@
 <body>
     <header>
         <nav>
-
+<?php
+require("./php/header-index.php")
+?>
         </nav>
     </header>
     <main>

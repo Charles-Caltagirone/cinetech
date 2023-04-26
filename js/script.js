@@ -20,8 +20,14 @@ function fetchMoviesAndSeries(type, div) {
         imgMovies.className = "d-block w-100";
         divItem.className = "carousel-item";
         divCaption.className = "carousel-caption";
-        titleMovie.innerHTML = element.title;
-        mediaURL.href = "film.php?id_movie='" + element.id;
+        // titleMovie.innerHTML = element.title;
+        if (type == "movie") {
+          titleMovie.innerHTML = element.title;
+        } else {
+          titleMovie.innerHTML = element.name;
+        }
+        mediaURL.href = "./php/details.php?id=" + element.id + "&type=" + type;
+        // console.log(element);
 
         carouselMoviesOrSeries.append(mediaURL);
         mediaURL.append(divItem);
