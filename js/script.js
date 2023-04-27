@@ -8,19 +8,19 @@ function fetchMoviesAndSeries(type, div) {
     .then((response) => response.json())
     .then((data) => {
       data.results.forEach((element) => {
-        let carouselMoviesOrSeries = document.getElementById(div);
+        let DivMoviesOrSeries = document.getElementById(div);
         let imgMovies = document.createElement("img");
         let divItem = document.createElement("div");
         let divCaption = document.createElement("div");
         let titleMovie = document.createElement("h3");
         let mediaURL = document.createElement("a");
 
-        // imgMovies.style = "width : 200px";
+        imgMovies.style = "width : 200px";
         imgMovies.src = imgUrl + element.poster_path;
-        imgMovies.className = "d-block w-100";
-        divItem.className = "carousel-item";
-        divCaption.className = "carousel-caption";
-        // titleMovie.innerHTML = element.title;
+        // imgMovies.className = "d-block w-100";
+        // divItem.className = "carousel-item";
+        // divCaption.className = "carousel-caption";
+        titleMovie.innerHTML = element.title;
         if (type == "movie") {
           titleMovie.innerHTML = element.title;
         } else {
@@ -29,7 +29,7 @@ function fetchMoviesAndSeries(type, div) {
         mediaURL.href = "./php/details.php?id=" + element.id + "&type=" + type;
         // console.log(element);
 
-        carouselMoviesOrSeries.append(mediaURL);
+        DivMoviesOrSeries.append(mediaURL);
         mediaURL.append(divItem);
         divItem.append(imgMovies, divCaption);
         divCaption.append(titleMovie);

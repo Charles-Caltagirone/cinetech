@@ -5,7 +5,6 @@ let container = document.getElementById("container");
 let divDescription = document.getElementById("description");
 let picture = document.getElementById("picture");
 let casting = document.getElementById("casting");
-// let type = "movie/";
 
 function getId() {
   let URL = window.location.href;
@@ -122,9 +121,17 @@ function fetchCasting() {
     });
 }
 
+// if (data.status_code == 34) {
+//   alert("INTROUVABLE");
+// } else {
+// if (getId() != "") {
 if (getType() == "person") {
   fetchDetails();
 } else {
   fetchDetails();
   fetchCasting();
 }
+// }
+// } else {
+// alert("NONNNN");
+// }

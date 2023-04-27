@@ -15,7 +15,7 @@ if (search) {
         apiUrl +
           "search/multi?api_key=" +
           apiKey +
-          "&language=en-US&page=1&query=" +
+          "&language=fr-FR&page=1&query=" +
           search.value
       )
         .then((response) => {
