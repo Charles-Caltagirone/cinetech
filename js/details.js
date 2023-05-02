@@ -5,6 +5,11 @@ let container = document.getElementById("container");
 let divDescription = document.getElementById("description");
 let picture = document.getElementById("picture");
 let casting = document.getElementById("casting");
+let director = document.getElementById("director");
+let similar = document.getElementById("similar");
+let similarDiv = document.getElementById("similarDiv");
+let directorDiv = document.getElementById("directorDiv");
+let castingDiv = document.getElementById("castingDiv");
 
 function getId() {
   let URL = window.location.href;
@@ -49,13 +54,20 @@ function fetchDetails() {
           ) {
             let img = document.createElement("img");
             img.src = imgUrl + data[element];
-            img.style = "width:200px";
+            img.style = "width:300px";
             picture.append(img);
           } else {
             if (
               element != "id" &&
               element != "imdb_id" &&
               element != "backdrop_path" &&
+              element != "original_language" &&
+              element != "homepage" &&
+              element != "popularity" &&
+              element != "status" &&
+              element != "tagline" &&
+              element != "original_title" &&
+              element != "vote_count" &&
               element != "gender"
             ) {
               if (element == "budget") {
@@ -95,43 +107,73 @@ function fetchCasting() {
       data.crew.forEach((element) => {
         // console.log(element.job);
         let p = document.createElement("p");
+        let mediaURL = document.createElement("a");
+        mediaURL.href = "./details.php?id=" + element.id + "&type=person";
         if (element.job == "Director") {
           //   console.log(element);
           p.innerText = element.original_name;
           let img = document.createElement("img");
           img.src = imgUrl + element.profile_path;
-          img.style = "width:200px";
-          casting.append(img, p);
+          img.style = "width:100px";
+          mediaURL.append(img, p);
+          director.append(mediaURL);
         }
       });
+
       data.cast.forEach((element) => {
         // console.log(element);
         // console.log(element.job);
         let p = document.createElement("p");
+        let mediaURL = document.createElement("a");
+        mediaURL.href = "./details.php?id=" + element.id + "&type=person";
         if (element.known_for_department == "Acting") {
           if (element.profile_path != null) {
             p.innerText = element.original_name;
             let img = document.createElement("img");
             img.src = imgUrl + element.profile_path;
-            img.style = "width:200px";
-            casting.append(img, p);
+            img.style = "width:100px";
+            mediaURL.append(img, p);
+            casting.append(mediaURL);
           }
         }
       });
     });
 }
 
-// if (data.status_code == 34) {
-//   alert("INTROUVABLE");
-// } else {
-// if (getId() != "") {
+function fetchSimilar() {
+  fetch(
+    apiUrl +
+      getType() +
+      "/" +
+      getId() +
+      "/similar?api_key=" +
+      apiKey +
+      "&language=fr-FR"
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      data.results.forEach((element) => {
+        // console.log(element);
+        let img = document.createElement("img");
+        let h2Div = document.createElement("h2");
+        let mediaURL = document.createElement("a");
+        mediaURL.href = "./details.php?id=" + element.id + "&type=" + getType();
+        h2Div.innerText = "Similaires :";
+        img.src = imgUrl + element.poster_path;
+        img.style = "width:100px";
+        mediaURL.append(img);
+        similar.append(mediaURL);
+      });
+    });
+}
+
 if (getType() == "person") {
   fetchDetails();
+  directorDiv.style.display = "none";
+  castingDiv.style.display = "none";
+  similarDiv.style.display = "none";
 } else {
   fetchDetails();
   fetchCasting();
+  fetchSimilar();
 }
-// }
-// } else {
-// alert("NONNNN");
-// }

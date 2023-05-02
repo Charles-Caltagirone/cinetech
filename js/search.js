@@ -3,7 +3,7 @@ const imgUrl = "https://image.tmdb.org/t/p/original";
 const apiUrl = "https://api.themoviedb.org/3/";
 
 const search = document.getElementById("searchBar"); //le input
-const result = document.getElementById("result"); //les résultats exacts
+const result = document.getElementById("result"); //les résultats 
 // console.log("hello");
 
 if (search) {
@@ -40,17 +40,8 @@ if (search) {
 
             result.append(resultsSearch);
             resultsSearch.append(mediaURL);
-            // result.appendChild(resultsSearch);
           });
         });
     }
   });
 }
-
-// désactiver la touche ENTREE
-// window.addEventListener("keypress", function (event) {
-//   if (event.key === "Enter") {
-//     event.preventDefault();
-//     return false;
-//   }
-// });

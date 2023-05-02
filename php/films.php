@@ -17,8 +17,15 @@
             require("./header-others.php");
             ?>
     </header>
-    <script src="./js/script.js"></script>
+    <main>
+        <select name="categories" id="categories-select" value="categories">
+        <option value="">Catégorie</option>
+        </select>
+        <div id="films"></div>
+    </main>
 
+    <script src="../js/search.js"></script>
+    <script src="../js/films.js"></script>
 </body>
 
 </html>
