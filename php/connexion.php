@@ -55,7 +55,7 @@ if (isset($_POST['submit'])) {
         </form>
     </main>
     <?php
-    var_dump($_SESSION);
+    var_dump($_SESSION['id']);
     ?>
     <script src="../js/search.js"></script>
 </body>

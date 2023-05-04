@@ -1,9 +1,10 @@
 <?php
-// $login = $_SESSION['login'];
+require "./bdd.php";
+$login = $_SESSION['login'];
 // var_dump($login);
-var_dump($_SESSION);
-
+// var_dump($_SESSION);
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -26,7 +27,7 @@ var_dump($_SESSION);
     <main>
         <h1>Profil de
             <?php
-            echo ""
+            echo $login;
             ?>
         </h1>
     </main>

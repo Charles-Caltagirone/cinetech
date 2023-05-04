@@ -1,5 +1,4 @@
 let container = document.getElementById("container");
-let starIcon = '<i class="fa-solid fa-star" style="color: #f6e713;"></i>'
 
 function fetchMoviesAndSeries(type, div) {
   fetch(apiUrl + type + "/popular?api_key=" + apiKey + "&language=fr-FR&page=1")
@@ -16,9 +15,6 @@ function fetchMoviesAndSeries(type, div) {
         imgMovies.style = "height : 30vh";
         imgMovies.src = imgUrl + element.poster_path;
         // imgMovies.className = "d-block w-100";
-        // divItem.className = "carousel-item";
-        // divCaption.className = "carousel-caption";
-        // titleMovie.innerHTML = element.title;
         if (type == "movie") {
           titleMovie.innerHTML = starIcon + element.vote_average;
         } else {

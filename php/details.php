@@ -1,5 +1,60 @@
 <?php
+require "./bdd.php";
 
+$id_film = $_GET['id'];
+$type = $_GET['type'];
+$id_utilisateur = $_SESSION['id'];
+
+$recup = $bdd->prepare("SELECT * FROM `favoris` WHERE id_utilisateur = ? AND id_film = ?");
+$recup->execute([$_SESSION['id'], $id_film]);
+$favoris = $recup->fetch(PDO::FETCH_ASSOC);
+
+if (isset($_POST['favorisBtn'])) {
+    if (empty($favoris)) {
+        $stmt = $bdd->prepare("INSERT INTO favoris (`id_utilisateur` ,`id_film` ,`type` ) VALUES (?,?,?) ");
+        $stmt->execute(array($id_utilisateur, $id_film, $type));
+        // header();
+    } else {
+        $stmt = $bdd->prepare("DELETE FROM favoris WHERE id_utilisateur = ? AND id_film = ?");
+        $stmt->execute([$id_utilisateur, $id_film]);
+    }
+}
+if (empty($favoris)) {
+
+?>
+    <script>
+        //         // Récupère l'élément d'icône
+        var iconeFavoris = document.getElementById("favorisOff");
+        console.log("favoris ON");
+        // console.log(iconeFavoris);
+        //         let test = document.getElementById("favorisOff");
+        //         // let test = document.querySelector(".fa-heart")
+        //         console.log(test);
+        //         console.log(test.className);
+        //         // let favorisOn = '<i class="fa-solid fa-heart"></i>';
+        //         // let favorisOff = '<i class="fa-regular fa-heart"></i>';
+
+        iconeFavoris.classList.remove("fa-regular fa-heart");
+        iconeFavoris.classList.add("fa-solid fa-heart");
+        //         
+    </script>
+<?php
+    //     // header();
+} else {
+    //     
+?>
+    <script>
+        var iconeFavoris = document.getElementById("favorisOff");
+        console.log("Favoris OFF");
+
+        iconeFavoris.classList.remove("fa-solid fa-heart");
+        iconeFavoris.classList.add("fa-regular fa-heart");
+        // etatFavori = 0;
+        //     
+    </script>
+<?php
+}
+// 
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +83,13 @@
             <div class="enteteDesc d-flex">
                 <div class="" id="picture"></div>
                 <div id="description"></div>
-                <div id="favorisDiv"><button id="favorisBtn" name="favorisBtn" type="submit"></button></div>
+                <div id="favorisDiv">
+                    <form action="" id="favorisForm" method="post">
+                        <button id="favorisBtn" name="favorisBtn" type="submit">
+                            <i class="fa-regular fa-heart" id="favorisOff"></i> Ajoutez
+                        </button>
+                    </form>
+                </div>
             </div>
             <div class="directorDiv detailsMedia" id="directorDiv">
                 <h3>
