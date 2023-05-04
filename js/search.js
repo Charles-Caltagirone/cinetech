@@ -1,6 +1,7 @@
 const apiKey = "d626a3bd2b510176142a8c48fbc04b97";
 const imgUrl = "https://image.tmdb.org/t/p/original";
 const apiUrl = "https://api.themoviedb.org/3/";
+let starIcon = '<i class="fa-solid fa-star" style="color: #f6e713;"></i>'
 
 const search = document.getElementById("searchBar"); //le input
 const result = document.getElementById("result"); //les résultats 
@@ -29,7 +30,7 @@ if (search) {
             let resultsSearch = document.createElement("p");
 
             mediaURL.href =
-              "./details.php?id=" + element.id + "&type=" + element.media_type;
+              "./details.php?id=" + element.id + "&type=" + element.media_typ;e
             if (element.media_type == "movie") {
               mediaURL.innerText = element.title + " (Film)";
             } else if (element.media_type == "tv") {

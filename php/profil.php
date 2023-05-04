@@ -1,5 +1,11 @@
+<?php
+// $login = $_SESSION['login'];
+// var_dump($login);
+var_dump($_SESSION);
+
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -13,11 +19,16 @@
 
 <body>
     <header>
-            <?php
-            require("./header-others.php");
-            ?>
+        <?php
+        require("./header-others.php");
+        ?>
     </header>
     <main>
+        <h1>Profil de
+            <?php
+            echo ""
+            ?>
+        </h1>
     </main>
 
     <script src="../js/search.js"></script>

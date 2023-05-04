@@ -10,6 +10,9 @@ let similar = document.getElementById("similar");
 let similarDiv = document.getElementById("similarDiv");
 let directorDiv = document.getElementById("directorDiv");
 let castingDiv = document.getElementById("castingDiv");
+let favorisDiv = document.getElementById("favorisDiv");
+let favorisBtn = document.getElementById("favorisBtn");
+let starIcon = '<i class="fa-solid fa-star" style="color: #f6e713;"></i>';
 
 function getId() {
   let URL = window.location.href;
@@ -82,7 +85,8 @@ function fetchDetails() {
                 divDescription.append(p);
               } else {
                 p.innerHTML = "<b>" + element + "</b>" + ":" + data[element];
-                divDescription.append(p);
+                favorisBtn.innerHTML = starIcon + " Ajouter aux favoris";
+                divDescription.append(p, favorisDiv);
               }
             }
           }
