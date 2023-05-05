@@ -54,9 +54,6 @@ if (isset($_POST['submit'])) {
             <input type="submit" class="btn btn-primary" value="Se connecter" name="submit" id="button">
         </form>
     </main>
-    <?php
-    var_dump($_SESSION['id']);
-    ?>
     <script src="../js/search.js"></script>
 </body>
 

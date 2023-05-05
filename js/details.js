@@ -1,6 +1,3 @@
-const apiKey = "d626a3bd2b510176142a8c48fbc04b97";
-const imgUrl = "https://image.tmdb.org/t/p/original";
-const apiUrl = "https://api.themoviedb.org/3/";
 let container = document.getElementById("container");
 let divDescription = document.getElementById("description");
 let picture = document.getElementById("picture");
@@ -11,12 +8,7 @@ let similarDiv = document.getElementById("similarDiv");
 let directorDiv = document.getElementById("directorDiv");
 let castingDiv = document.getElementById("castingDiv");
 let favorisDiv = document.getElementById("favorisDiv");
-let favorisBtn = document.getElementById("favorisBtn");
 let favorisForm = document.getElementById("favorisForm");
-// let favorisOn = '<i class="fa-solid fa-heart" id=""></i>';
-// let favorisOff = '<i class="" id="favorisOff"></i>';
-// console.log(favorisOff);
-// let favoris = true;
 
 function getId() {
   let URL = window.location.href;
@@ -31,16 +23,8 @@ function getType() {
   //   console.log(type);
   return type;
 }
-
 function fetchDetails() {
-  fetch(
-    apiUrl +
-      getType() +
-      "/" +
-      getId() +
-      "?api_key=" +
-      apiKey +
-      "&language=fr-FR"
+  fetch(    apiUrl +      getType() +      "/" +      getId() +      "?api_key=" +      apiKey +      "&language=fr-FR"
   )
     .then((response) => response.json())
     .then((data) => {
@@ -175,27 +159,6 @@ function fetchSimilar() {
     });
 }
 
-function addFavoris() {
-  let favorisBtn = document.createElement("button");
-  favorisBtn.setAttribute("type", "submit");
-  favorisBtn.setAttribute("name", "favorisBtn");
-  // let favorisIcon = document.createElement("i");
-  // favorisIcon.setAttribute("class", "fa-regular fa-heart")
-  // favorisIcon.setAttribute("id", "favorisIcon")
-  // favorisBtn.innerHTML = favorisOff + " Ajouter aux favoris";
-  // favorisBtn.append(favorisIcon);
-  favorisForm.append(favorisBtn);
-
-  // favorisBtn.onclick = function () {
-  //   if (favoris == true) {
-  //     favoris = false;
-  //     favorisBtn.innerHTML = favorisOff + " Ajouter aux favoris";
-  //   } else {
-  //     favoris = true;
-  //     favorisBtn.innerHTML = favorisOn + " Retirer des favoris";
-  //   }
-  // };
-}
 
 if (getType() == "person") {
   fetchDetails();
@@ -204,7 +167,6 @@ if (getType() == "person") {
   similarDiv.style.display = "none";
 } else {
   fetchDetails();
-  // addFavoris();
   fetchCasting();
   fetchSimilar();
 }

@@ -1,60 +1,6 @@
 <?php
 require "./bdd.php";
-
-$id_film = $_GET['id'];
-$type = $_GET['type'];
-$id_utilisateur = $_SESSION['id'];
-
-$recup = $bdd->prepare("SELECT * FROM `favoris` WHERE id_utilisateur = ? AND id_film = ?");
-$recup->execute([$_SESSION['id'], $id_film]);
-$favoris = $recup->fetch(PDO::FETCH_ASSOC);
-
-if (isset($_POST['favorisBtn'])) {
-    if (empty($favoris)) {
-        $stmt = $bdd->prepare("INSERT INTO favoris (`id_utilisateur` ,`id_film` ,`type` ) VALUES (?,?,?) ");
-        $stmt->execute(array($id_utilisateur, $id_film, $type));
-        // header();
-    } else {
-        $stmt = $bdd->prepare("DELETE FROM favoris WHERE id_utilisateur = ? AND id_film = ?");
-        $stmt->execute([$id_utilisateur, $id_film]);
-    }
-}
-if (empty($favoris)) {
-
-?>
-    <script>
-        //         // Récupère l'élément d'icône
-        var iconeFavoris = document.getElementById("favorisOff");
-        console.log("favoris ON");
-        // console.log(iconeFavoris);
-        //         let test = document.getElementById("favorisOff");
-        //         // let test = document.querySelector(".fa-heart")
-        //         console.log(test);
-        //         console.log(test.className);
-        //         // let favorisOn = '<i class="fa-solid fa-heart"></i>';
-        //         // let favorisOff = '<i class="fa-regular fa-heart"></i>';
-
-        iconeFavoris.classList.remove("fa-regular fa-heart");
-        iconeFavoris.classList.add("fa-solid fa-heart");
-        //         
-    </script>
-<?php
-    //     // header();
-} else {
-    //     
-?>
-    <script>
-        var iconeFavoris = document.getElementById("favorisOff");
-        console.log("Favoris OFF");
-
-        iconeFavoris.classList.remove("fa-solid fa-heart");
-        iconeFavoris.classList.add("fa-regular fa-heart");
-        // etatFavori = 0;
-        //     
-    </script>
-<?php
-}
-// 
+ob_start('ob_gzhandler');
 ?>
 
 <!DOCTYPE html>
@@ -70,6 +16,8 @@ if (empty($favoris)) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/9a09d189de.js" crossorigin="anonymous"></script>
+    <!-- <script src="../js/details.js" defer></script> -->
+
 </head>
 
 <body>
@@ -85,9 +33,8 @@ if (empty($favoris)) {
                 <div id="description"></div>
                 <div id="favorisDiv">
                     <form action="" id="favorisForm" method="post">
-                        <button id="favorisBtn" name="favorisBtn" type="submit">
-                            <i class="fa-regular fa-heart" id="favorisOff"></i> Ajoutez
-                        </button>
+                        <!-- <button id="favorisBtn" name="favorisBtn" type="submit"> -->
+                        <!-- <i id="favorisOff" class="fa-regular fa-star"></i></button> -->
                     </form>
                 </div>
             </div>
@@ -112,7 +59,57 @@ if (empty($favoris)) {
             </div>
         </div>
     </main>
-    <!-- <script src="../js/search.js"></script> -->
+    <?php
+    if (isset($_SESSION['id'])) {
+        $id_media = $_GET['id'];
+        $type = $_GET['type'];
+        $id_utilisateur = $_SESSION['id'];
+
+        $recup = $bdd->prepare("SELECT * FROM `favoris` WHERE id_utilisateur = ? AND id_media = ?");
+        $recup->execute([$_SESSION['id'], $id_media]);
+        $favoris = $recup->fetch(PDO::FETCH_ASSOC);
+    ?>
+        <script>
+            let favorisBtn = document.createElement("button");
+            favorisBtn.setAttribute("type", "submit");
+            favorisBtn.setAttribute("name", "favorisBtn");
+            let favorisIcon = document.createElement("i");
+            favorisIcon.setAttribute("id", "favorisIcon")
+            favorisBtn.append(favorisIcon);
+            favorisForm.append(favorisBtn);
+        </script>
+
+        <?php
+        if (isset($_POST['favorisBtn'])) {
+            if (empty($favoris)) {
+                $stmt = $bdd->prepare("INSERT INTO favoris (`id_utilisateur` ,`id_media` ,`type` ) VALUES (?,?,?) ");
+                $stmt->execute(array($id_utilisateur, $id_media, $type));
+                header("Location: ./details.php?id=" . $id_media . "&type=" . $type);
+            } else {
+                $stmt = $bdd->prepare("DELETE FROM favoris WHERE id_utilisateur = ? AND id_media = ?");
+                $stmt->execute([$id_utilisateur, $id_media]);
+                header("Location: ./details.php?id=" . $id_media . "&type=" . $type);
+            }
+        }
+
+        if (empty($favoris)) {
+        ?>
+            <script>
+                favorisIcon.className = "fa-regular fa-heart";
+                favorisBtn.innerHTML += " Ajouter aux favoris"
+            </script>
+        <?php
+        } else {
+        ?>
+            <script>
+                favorisIcon.className = "fa-solid fa-heart";
+                favorisBtn.innerHTML += " Retirer des favoris"
+            </script>
+    <?php
+        }
+    }
+    ?>
+    <script src="../js/search.js"></script>
     <script src="../js/details.js"></script>
 </body>
 

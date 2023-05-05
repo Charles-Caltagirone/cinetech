@@ -1,6 +1,9 @@
 .details {
     /* overflow-x: scroll;
     overflow-y: hidden; */
-    overflow: auto;
+    overflow: auto !important;
     /* scrollbar-width: 70%; */
+}
+body{
+    background-color: lightblue !important;
 }
