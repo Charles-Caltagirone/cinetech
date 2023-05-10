@@ -38,24 +38,26 @@ ob_start('ob_gzhandler');
                     </form>
                 </div>
             </div>
-            <div class="directorDiv detailsMedia" id="directorDiv">
-                <h3>
-                    Réalisateur :
-                </h3>
-                <div class="d-flex" id="director">
+            <div class="fullCast">
+                <div class="directorDiv detailsMedia" id="directorDiv">
+                    <h3>
+                        Réalisateur :
+                    </h3>
+                    <div class="d-flex" id="director">
+                    </div>
                 </div>
-            </div>
-            <div class="castingDIV detailsMedia" id="castingDiv">
-                <h3>
-                    Casting :
-                </h3>
-                <div class="d-flex w-75 details overflow-auto" id="casting"></div>
-            </div>
-            <div class="similarDIV detailsMedia" id="similarDiv">
-                <h3>
-                    Similaires :
-                </h3>
-                <div class="d-flex w-75 details overflow-auto" id="similar"></div>
+                <div class="castingDIV detailsMedia" id="castingDiv">
+                    <h3>
+                        Casting :
+                    </h3>
+                    <div class="d-flex details overflow-auto" id="casting"></div>
+                </div>
+                <div class="similarDIV detailsMedia" id="similarDiv">
+                    <h3>
+                        Similaires :
+                    </h3>
+                    <div class="d-flex details overflow-auto" id="similar"></div>
+                </div>
             </div>
         </div>
     </main>

@@ -45,7 +45,7 @@ function fetchDetails() {
           ) {
             let img = document.createElement("img");
             img.src = imgUrl + data[element];
-            img.style = "width:300px";
+            img.style = "width:300px; margin:1em 2em 2em 1em; border-radius:10px";
             picture.append(img);
           } else {
             if (
@@ -106,7 +106,7 @@ function fetchCasting() {
           p.innerText = element.original_name;
           let img = document.createElement("img");
           img.src = imgUrl + element.profile_path;
-          img.style = "width:100px";
+          img.style = "width:100px; border-radius:5px; margin:5px";
           mediaURL.append(img, p);
           director.append(mediaURL);
         }
@@ -123,7 +123,7 @@ function fetchCasting() {
             p.innerText = element.original_name;
             let img = document.createElement("img");
             img.src = imgUrl + element.profile_path;
-            img.style = "width:100px";
+            img.style = "width:100px; border-radius:5px; margin:5px";
             mediaURL.append(img, p);
             casting.append(mediaURL);
           }
@@ -152,7 +152,7 @@ function fetchSimilar() {
         mediaURL.href = "./details.php?id=" + element.id + "&type=" + getType();
         h2Div.innerText = "Similaires :";
         img.src = imgUrl + element.poster_path;
-        img.style = "width:100px";
+        img.style = "width:100px; border-radius:5px; margin:5px";
         mediaURL.append(img);
         similar.append(mediaURL);
       });

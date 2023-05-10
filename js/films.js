@@ -1,4 +1,5 @@
 let select = document.getElementById("categories-select");
+// let listCatDiv = document.getElementById("listCat");
 
 fetch(apiUrl + "genre/movie/list?api_key=" + apiKey + "&language=fr-FR")
   .then((response) => response.json())
@@ -33,8 +34,8 @@ function fetchGenres(type, div) {
             let p = document.createElement("p");
             let img = document.createElement("img");
             let mediaURL = document.createElement("a");
+            mediaURL.setAttribute("class", "resultMedia")
 
-            img.style = "height : 30vh";
             img.src =
               "https://image.tmdb.org/t/p/original" + element.poster_path;
             mediaURL.href =

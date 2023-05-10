@@ -8,11 +8,13 @@ function fetchMoviesAndSeries(type, div) {
         let DivMoviesOrSeries = document.getElementById(div);
         let imgMovies = document.createElement("img");
         let divItem = document.createElement("div");
+        divItem.setAttribute("class", "resultMedia")
+        divItem.setAttribute("id", "resultMediaIndex")
         let divCaption = document.createElement("div");
         let titleMovie = document.createElement("h5");
         let mediaURL = document.createElement("a");
 
-        imgMovies.style = "height : 30vh";
+        // titleMovie.style("class", "resultMedia")
         imgMovies.src = imgUrl + element.poster_path;
         // imgMovies.className = "d-block w-100";
         if (type == "movie") {

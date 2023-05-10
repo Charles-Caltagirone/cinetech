@@ -15,21 +15,27 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="./series.php">Séries</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./connexion.php">Connexion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./inscription.php">Inscription</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./profil.php">Profil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./deco.php">Déconnexion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./search.php">Search</a>
-                </li>
+                <?php
+                if (!isset($_SESSION['id'])) {
+                ?>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./connexion.php">Connexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./inscription.php">Inscription</a>
+                    </li>
+                <?php
+                } else {
+                ?>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./profil.php">Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./deco.php"><i class="fa-solid fa-right-from-bracket" style="color: #000000;"></i></a>
+                    </li>
+                <?php
+                }
+                ?>
             </ul>
             <form class="d-flex">
                 <input class="form-control me-2" id="searchBar" type="search" placeholder="Search" aria-label="Search" autocomplete="off">

@@ -1,5 +1,5 @@
 <?php
-// var_dump($_SESSION);
+require "./php/bdd.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,8 +23,14 @@
     </header>
     <main>
         <div class="" id="container">
-            <div class="details d-flex" id="scrollMovies"></div>
-            <div class="details d-flex" id="scrollSeries"></div>
+            <div id="filmsIndex">
+                <h2>Films populaires :</h2>
+                <div class="details d-flex" id="scrollMovies"></div>
+            </div>
+            <div id="seriesIndex">
+                <h2>Séries populaires :</h2>
+                <div class="details d-flex" id="scrollSeries"></div>
+            </div>
         </div>
     </main>
     <script src="./js/search.js"></script>
