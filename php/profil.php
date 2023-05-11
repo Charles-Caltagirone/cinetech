@@ -37,7 +37,7 @@ if (!isset($_SESSION['id'])) {
         ?>
     </header>
     <main>
-        <h1>Profil de
+        <h1>Favoris de
             <?php
             echo $login;
             ?>

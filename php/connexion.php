@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
             $_SESSION['login'] = $login;
             $_SESSION['password'] = $password;
             $_SESSION = $result;
-            // header("Location: ../index.php");
+            header("Location: ./profil.php");
         }
     }
 }
@@ -89,7 +89,7 @@ if (isset($_POST['submit'])) {
         </section>
     </main>
     <?php
-    var_dump($_SESSION['id']);
+    // var_dump($_SESSION['id']);
     ?>
     <script src="../js/search.js"></script>
 </body>
